@@ -21,7 +21,7 @@ namespace Step_Test_3
 
         decimal Age = Agenum.Value;
         decimal Mhr1lbl.Text = 220 - Age;
-        decimal Mhr85albl.Text = Mhr * 0.85;
+        decimal Mhr85albl.Text = Mhr* 0.85;
         decimal Mhr50 = Mhr * 0.5;
 
 
@@ -54,6 +54,9 @@ namespace Step_Test_3
             return list.Sum(axisX = axisX * axisX);
         }
 
+        public void ArrayAssign()
+    {
+
         decimal[] axisY = { 0, 0, 0, 0, 0 };
         decimal[] axesXY = { 0, 0, 0, 0, 0 };
 
@@ -77,19 +80,27 @@ namespace Step_Test_3
             {
                 position = 0;
             }
+    }
+    private void ArrayCalc()
+    { 
+        //Sums of the arrays
+        decimal SumX = axisX.Sum();
+        decimal SumY = axisY.Sum();
+        decimal SumXY = axesXY.Sum();
+        //Means of X and Y Sum arrays
+        decimal SYMean = SumY / position;
+        //Calculate Slope and Y Intercept
+        decimal Slope = (SumXY - (((SumXY / position)) / (SumXSquared(axisX) - (SumXSquared(axisX) / position))));
+        decimal Yintercept = SYMean - (Slope * SYMean);
+        //Calculates the Aerobic Capacity
+        decimal Capacity = (Mhr - Yintercept) / Slope;
+    }
 
-    //Sums of the arrays
-    decimal SumX = axisX.Sum();
-    decimal SumY = axisY.Sum();
-    decimal SumXY = axesXY.Sum();
-    //Means of X and Y Sum arrays
-    decimal SYMean = SumY / position;
-    //Calculate Slope and Y Intercept
-    decimal Slope = (SumXY - (((SumXY / position)) / (SumXSquared(axisX) - (SumXSquared(axisX) / position))));
-    decimal Yintercept = SYMean - (Slope * SYMean);
-    //Calculates the Aerobic Capacity
-    decimal Capacity = (Mhr - Yintercept) / Slope;
-
+    public void Calcbtn_Click(object sender, EventArgs e)
+    {
+        ArrayAssign();
+        ArrayCalc();
+    }
 
     private void Clearbtn_Click(object sender, EventArgs e)
     {
