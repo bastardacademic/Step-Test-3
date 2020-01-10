@@ -108,25 +108,25 @@ namespace Step_Test_3
                 {
                     if (Capacity >= 60)
                     {
-                        MessageBox.Show("Excellent");
+                        MessageBox.Show(Capacity + ": Excellent");
 
                     }
                     else if ((Capacity >= 48) && (Capacity <= 59))
                     {
-                        MessageBox.Show("Good");
+                        MessageBox.Show(Capacity + ": Good");
 
                     }
                     else if ((Capacity >= 39) && (Capacity <= 47))
                     {
-                        MessageBox.Show("Average");
+                        MessageBox.Show(Capacity + ": Average");
                     }
                     else if ((Capacity >= 30) && (Capacity <= 38))
                     {
-                        MessageBox.Show("Below Average");
+                        MessageBox.Show(Capacity + ": Below Average");
                     }
                     else
                     {
-                        MessageBox.Show("Poor");
+                        MessageBox.Show(Capacity + ": Poor");
                     }
                 }
             }
@@ -136,25 +136,25 @@ namespace Step_Test_3
                 {
                     if (Capacity >= 55)
                     {
-                        MessageBox.Show("Excellent");
+                        MessageBox.Show(Capacity + ": Excellent");
 
                     }
                     else if ((Capacity >= 44) && (Capacity <= 54))
                     {
-                        MessageBox.Show("Good");
+                        MessageBox.Show(Capacity + ": Good");
 
                     }
                     else if ((Capacity >= 35) && (Capacity <= 43))
                     {
-                        MessageBox.Show("Average");
+                        MessageBox.Show(Capacity + ": Average");
                     }
                     else if ((Capacity >= 28) && (Capacity <= 34))
                     {
-                        MessageBox.Show("Below Average");
+                        MessageBox.Show(Capacity + ": Below Average");
                     }
                     else
                     {
-                        MessageBox.Show("Poor");
+                        MessageBox.Show(Capacity + ": Poor");
                     }
                 }
             }
@@ -164,25 +164,25 @@ namespace Step_Test_3
                 {
                     if (Capacity >= 50)
                     {
-                        MessageBox.Show("Excellent");
+                        MessageBox.Show(Capacity + ": Excellent");
 
                     }
                     else if ((Capacity >= 40) && (Capacity <= 49))
                     {
-                        MessageBox.Show("Good");
+                        MessageBox.Show(Capacity + ": Good");
 
                     }
                     else if ((Capacity >= 34) && (Capacity <= 39))
                     {
-                        MessageBox.Show("Average");
+                        MessageBox.Show(Capacity + ": Average");
                     }
                     else if ((Capacity >= 26) && (Capacity <= 33))
                     {
-                        MessageBox.Show("Below Average");
+                        MessageBox.Show(Capacity + ": Below Average");
                     }
                     else
                     {
-                        MessageBox.Show("Poor");
+                        MessageBox.Show(Capacity + ": Poor");
                     }
                 }
             }
@@ -192,25 +192,25 @@ namespace Step_Test_3
                 {
                     if (Capacity >= 46)
                     {
-                        MessageBox.Show("Excellent");
+                        MessageBox.Show(Capacity + ": Excellent");
 
                     }
                     else if ((Capacity >= 37) && (Capacity <= 45))
                     {
-                        MessageBox.Show("Good");
+                        MessageBox.Show(Capacity + ": Good");
 
                     }
                     else if ((Capacity >= 32) && (Capacity <= 36))
                     {
-                        MessageBox.Show("Average");
+                        MessageBox.Show(Capacity + ": Average");
                     }
                     else if ((Capacity >= 25) && (Capacity <= 32))
                     {
-                        MessageBox.Show("Below Average");
+                        MessageBox.Show(Capacity + ": Below Average");
                     }
                     else
                     {
-                        MessageBox.Show("Poor");
+                        MessageBox.Show(Capacity + ": Poor");
                     }
                 }
             }
@@ -221,17 +221,17 @@ namespace Step_Test_3
                 {
                     if (Capacity >= 44)
                     {
-                        MessageBox.Show("Excellent");
+                        MessageBox.Show(Capacity + ": Excellent");
 
                     }
                     else if ((Capacity >= 35) && (Capacity <= 43))
                     {
-                        MessageBox.Show("Good");
+                        MessageBox.Show(Capacity + ": Good");
 
                     }
                     else if ((Capacity >= 29) && (Capacity <= 34))
                     {
-                        MessageBox.Show("Average");
+                        MessageBox.Show(Capacity + ": Average");
                     }
                     else if ((Capacity >= 23) && (Capacity <= 28))
                     {
@@ -239,7 +239,7 @@ namespace Step_Test_3
                     }
                     else
                     {
-                        MessageBox.Show("Poor");
+                        MessageBox.Show(Capacity + ": Poor");
                     }
                 }
             }
@@ -249,25 +249,25 @@ namespace Step_Test_3
                 {
                     if (Capacity >= 40)
                     {
-                        MessageBox.Show("Excellent");
+                        MessageBox.Show(Capacity + ": Excellent");
 
                     }
                     else if ((Capacity >= 33) && (Capacity <= 39))
                     {
-                        MessageBox.Show("Good");
+                        MessageBox.Show(Capacity + ": Good");
 
                     }
                     else if ((Capacity >= 25) && (Capacity <= 32))
                     {
-                        MessageBox.Show("Average");
+                        MessageBox.Show(Capacity + ": Average");
                     }
                     else if ((Capacity >= 20) && (Capacity <= 24))
                     {
-                        MessageBox.Show("Below Average");
+                        MessageBox.Show(Capacity + ": Below Average");
                     }
                     else
                     {
-                        MessageBox.Show("Average");
+                        MessageBox.Show(Capacity + ": "Average");
                     }
                 }
             }
@@ -279,25 +279,25 @@ namespace Step_Test_3
                 {
                     if (Capacity >= 55)
                     {
-                        MessageBox.Show("Excellent");
+                        MessageBox.Show(Capacity + ": Excellent");
 
                     }
                     else if ((Capacity >= 44) && (Capacity <= 54))
                     {
-                        MessageBox.Show("Good");
+                        MessageBox.Show(Capacity + ": Good");
 
                     }
                     else if ((Capacity >= 36) && (Capacity <= 43))
                     {
-                        MessageBox.Show("Average");
+                        MessageBox.Show(Capacity + ": Average");
                     }
                     else if ((Capacity >= 29) && (Capacity <= 35))
                     {
-                        MessageBox.Show("Below Average");
+                        MessageBox.Show(Capacity + ": Below Average");
                     }
                     else
                     {
-                        MessageBox.Show("Poor");
+                        MessageBox.Show(Capacity + ": Poor");
                     }
                 }
             }
@@ -308,25 +308,25 @@ namespace Step_Test_3
                 {
                     if (Capacity >= 50)
                     {
-                        MessageBox.Show("Excellent");
+                        MessageBox.Show(Capacity + ": Excellent");
 
                     }
                     else if ((Capacity >= 40) && (Capacity <= 49))
                     {
-                        MessageBox.Show("Good");
+                        MessageBox.Show(Capacity + ": Good");
 
                     }
                     else if ((Capacity >= 32) && (Capacity <= 39))
                     {
-                        MessageBox.Show("Average");
+                        MessageBox.Show(Capacity + ": Average");
                     }
                     else if ((Capacity >= 27) && (Capacity <= 31))
                     {
-                        MessageBox.Show("Below Average");
+                        MessageBox.Show(Capacity + ": Below Average");
                     }
                     else
                     {
-                        MessageBox.Show("Poor");
+                        MessageBox.Show(Capacity + ": Poor");
                     }
                 }
             }
@@ -337,25 +337,25 @@ namespace Step_Test_3
                 {
                     if (Capacity >= 46)
                     {
-                        MessageBox.Show("Excellent");
+                        MessageBox.Show(Capacity + ": Excellent");
 
                     }
                     else if ((Capacity >= 36) && (Capacity <= 45))
                     {
-                        MessageBox.Show("Good");
+                        MessageBox.Show(Capacity + ": Good");
 
                     }
                     else if ((Capacity >= 30) && (Capacity <= 35))
                     {
-                        MessageBox.Show("Average");
+                        MessageBox.Show(Capacity + ": Average");
                     }
                     else if ((Capacity >= 25) && (Capacity <= 29))
                     {
-                        MessageBox.Show("Below Average");
+                        MessageBox.Show(Capacity + ": Below Average");
                     }
                     else
                     {
-                        MessageBox.Show("Poor");
+                        MessageBox.Show(Capacity + ": Poor");
                     }
                 }
             }
@@ -365,25 +365,25 @@ namespace Step_Test_3
                 {
                     if (Capacity >= 43)
                     {
-                        MessageBox.Show("Excellent");
+                        MessageBox.Show(Capacity + ": "Excellent");
 
                     }
                     else if ((Capacity >= 34) && (Capacity <= 42))
                     {
-                        MessageBox.Show("Good");
+                        MessageBox.Show(Capacity + ": Good");
 
                     }
                     else if ((Capacity >= 28) && (Capacity <= 33))
                     {
-                        MessageBox.Show("Average");
+                        MessageBox.Show(Capacity + ": Average");
                     }
                     else if ((Capacity >= 22) && (Capacity <= 27))
                     {
-                        MessageBox.Show("Below Average");
+                        MessageBox.Show(Capacity + ": Below Average");
                     }
                     else
                     {
-                        MessageBox.Show("Poor");
+                        MessageBox.Show(Capacity + ": Poor");
                     }
                 }
             }
@@ -394,25 +394,25 @@ namespace Step_Test_3
                 {
                     if (Capacity >= 41)
                     {
-                        MessageBox.Show("Excellent");
+                        MessageBox.Show(Capacity + ": Excellent");
 
                     }
                     else if ((Capacity >= 33) && (Capacity <= 40))
                     {
-                        MessageBox.Show("Good");
+                        MessageBox.Show(Capacity + ": Good");
 
                     }
                     else if ((Capacity >= 26) && (Capacity <= 32))
                     {
-                        MessageBox.Show("Average");
+                        MessageBox.Show(Capacity + ": Average");
                     }
                     else if ((Capacity >= 21) && (Capacity <= 25))
                     {
-                        MessageBox.Show("Below Average");
+                        MessageBox.Show(Capacity + ": Below Average");
                     }
                     else
                     {
-                        MessageBox.Show("Poor");
+                        MessageBox.Show(Capacity + ": Poor");
                     }
                 }
 
@@ -423,25 +423,25 @@ namespace Step_Test_3
 
                     if (Capacity >= 39)
                     {
-                        MessageBox.Show("Excellent");
+                        MessageBox.Show(Capacity + ": Excellent");
 
                     }
                     else if ((Capacity >= 31) && (Capacity <= 38))
                     {
-                        MessageBox.Show("Good");
+                        MessageBox.Show(Capacity + ": Good");
 
                     }
                     else if ((Capacity >= 24) && (Capacity <= 30))
                     {
-                        MessageBox.Show("Average");
+                        MessageBox.Show(Capacity + ": Average");
                     }
                     else if ((Capacity >= 19) && (Capacity <= 23))
                     {
-                        MessageBox.Show("Below Average");
+                        MessageBox.Show(Capacity + ": Below Average");
                     }
                     else
                     {
-                        MessageBox.Show("Poor");
+                        MessageBox.Show(Capacity + ": Poor");
                     }
             }
 
