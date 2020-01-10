@@ -12,53 +12,23 @@ namespace Step_Test_3
 {
     public partial class Form1 : Form
     {
+        decimal Age = 0;
+        decimal Mhr50 = 0;
+        decimal Mhr = 0;
+
+        static decimal[] axisY = { 0, 0, 0, 0, 0 };
+        static decimal[] axesX = { 0, 0, 0, 0, 0 };
+        static decimal[] axesXY = { 0, 0, 0, 0, 0 };
+
         public Form1()
         {
             InitializeComponent();
-        }
 
-        decimal[] axisX = { 0, 0, 0, 0, 0 };
-
-        decimal Age = Agenum.Value;
-        decimal Mhr1lbl.Text = 220 - Age;
-        decimal Mhr85albl.Text = Mhr* 0.85;
-        decimal Mhr50 = Mhr * 0.5;
-
-
-        //Sets time and date stamp for database record
-        private DateTime localDate = DateTime.Now;
-
-        //Sets X array with values determined by Step Height
-        public void SH15rb_CheckedChanged(object sender, EventArgs e)
-        {
-            decimal[] axisX = { 11, 14, 18, 21, 25 };
-        }
-
-        public void SH20rb_CheckedChanged(object sender, EventArgs e)
-        {
-            decimal[] axisX = { 12, 17, 21, 25, 29 };
-        }
-
-        public void SH25rb_CheckedChanged(object sender, EventArgs e)
-        {
-            decimal[] axisX = { 14, 19, 24, 28, 33 };
-        }
-
-        public void SH30rb_CheckedChanged(object sender, EventArgs e)
-        {
-            decimal[] axisX = { 16, 21, 27, 32, 37 };
-        }
-
-        public static decimal SumXSquared(IEnumerable<decimal> list)
-        {
-            return list.Sum(axisX = axisX * axisX);
-        }
-
-        public void ArrayAssign()
-        {
-
-            decimal[] axisY = { 0, 0, 0, 0, 0 };
-            decimal[] axesXY = { 0, 0, 0, 0, 0 };
+            Age = this.Agenum.Value;
+            Mhr = 220 - Age;
+            this.Mhrlbl.Text = (Mhr).ToString();
+            this.Mhr85albl.Text = (Mhr * (decimal)0.85).ToString();
+            Mhr50 = Mhr * (decimal)0.5;
 
             //Places Heart Rate values into array
             axisY[0] = HR1num.Value;
@@ -80,27 +50,58 @@ namespace Step_Test_3
             {
                 position = 0;
             }
-        }
-        public void ArrayCalc()
-        {
+
             //Sums of the arrays
             decimal SumX = axisX.Sum();
             decimal SumY = axisY.Sum();
             decimal SumXY = axesXY.Sum();
             //Means of X and Y Sum arrays
+
+            if (position == 0)
+                return;
+
             decimal SYMean = SumY / position;
             //Calculate Slope and Y Intercept
-            decimal Slope = SumXY - (SumXY / position / (SumXSquared(axisX) - (SumXSquared(axisX) / position)));
+            decimal Slope = (SumXY - (((SumXY / position)) / (SumXSquared(axisX) - (SumXSquared(axisX) / position))));
             decimal Yintercept = SYMean - (Slope * SYMean);
             //Calculates the Aerobic Capacity
             decimal Capacity = (Mhr - Yintercept) / Slope;
         }
 
+        decimal[] axisX = { 0, 0, 0, 0, 0 };
+
+        //Sets time and date stamp for database record
+        private DateTime localDate = DateTime.Now;
+
+        //Sets X array with values determined by Step Height
+        public void SH15rb_CheckedChanged(object sender, EventArgs e)
+        {
+
+            decimal[] axisX = { 11, 14, 18, 21, 25 };
+        }
+
+        public void SH20rb_CheckedChanged(object sender, EventArgs e)
+        {
+            decimal[] axisX = { 12, 17, 21, 25, 29 };
+        }
+
+        public void SH25rb_CheckedChanged(object sender, EventArgs e)
+        {
+            decimal[] axisX = { 14, 19, 24, 28, 33 };
+        }
+
+        public void SH30rb_CheckedChanged(object sender, EventArgs e)
+        {
+            decimal[] axisX = { 16, 21, 27, 32, 37 };
+        }
+
+        public decimal SumXSquared(IEnumerable<decimal> list)
+        {
+            return (decimal)Math.Pow((double)list.Sum(), 2);
+        }
+    }
         public void Calcbtn_Click(object sender, EventArgs e)
         {
-            ArrayAssign();
-            ArrayCalc();
-
             if (Femalerb.Checked)
             {
                 if ((Age >= 15) && (Age <= 19))
@@ -447,27 +448,27 @@ namespace Step_Test_3
         }
     }
 
-        private void Clearbtn_Click(object sender, EventArgs e)
-        {
-            //Reset all inputs to clear
-            HR1num.Value = "0";
-            HR2num.Value = "0";
-            HR3num.Value = "0";
-            HR4num.Value = "0";
-            HR5num.Value = "0";
-            Agenum.Value = "16";
-            Firsttxt.Text = "";
-            Lasttxt.Text = "";
-            Malerb.Checked = false;
-            Femalerb.Checked = false;
-            SH15rbtn.Checked = false;
-            SH20rb.Checked = false;
-            SH25rb.Checked = false;
-            SH30rb.Checked = false;
-        }
-
-        private void Savebtn_Click(object sender, EventArgs e)
-        {
-
-        }
+    private void Clearbtn_Click(object sender, EventArgs e)
+    {
+        //Reset all inputs to clear
+        HR1num.Value = (0);
+        HR2num.Value = (0);
+        HR3num.Value = (0);
+        HR4num.Value = (0);
+        HR5num.Value = (0);
+        Agenum.Value = (16);
+        Firsttxt.Text = ("");
+        Lasttxt.Text = ("");
+        Malerbtn.Checked = false;
+        Femalerbtn.Checked = false;
+        this.SH15rb.Checked = false;
+        SH20rb.Checked = false;
+        SH25rb.Checked = false;
+        SH30rb.Checked = false;
     }
+
+    private void Savebtn_Click(object sender, EventArgs e)
+    {
+
+    }
+}
