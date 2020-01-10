@@ -28,8 +28,6 @@ namespace Step_Test_3
             InitializeComponent();
         }
 
-        decimal[] axisX = { 0, 0, 0, 0, 0 };
-
         //Sets X array with values determined by Step Height
         public void SH15rb_CheckedChanged(object sender, EventArgs e)
         {
@@ -62,7 +60,7 @@ namespace Step_Test_3
 
         Age = this.Agenum.Value;
         Mhr = 220 - Age;
-        this.Mhrlbl.Text = (Mhr).ToString();
+        this.Mhrlbl.Text = Mhr.ToString();
         this.Mhr85albl.Text = (Mhr * (decimal)0.85).ToString();
         Mhr50 = Mhr * (decimal)0.5;
 
@@ -98,13 +96,13 @@ namespace Step_Test_3
 
         decimal SYMean = SumY / position;
         //Calculate Slope and Y Intercept
-        decimal Slope = (SumXY - (((SumXY / position)) / (SumXSquared(axisX) - (SumXSquared(axisX) / position))));
+        decimal Slope = SumXY - (SumXY / position / (SumXSquared(axisX) - (SumXSquared(axisX) / position)));
         decimal Yintercept = SYMean - (Slope * SYMean);
         //Calculates the Aerobic Capacity
         decimal Capacity = (Mhr - Yintercept) / Slope;
 
         if (Femalerb.Checked)
-            {
+        {
                 if ((Age >= 15) && (Age <= 19))
                 {
                     if (Capacity >= 60)
@@ -130,9 +128,7 @@ namespace Step_Test_3
                         MessageBox.Show(Capacity + ": Poor");
                     }
                 }
-            }
-            if (Femalerb.Checked)
-            {
+        
                 if ((Age >= 20) && (Age <= 29))
                 {
                     if (Capacity >= 55)
@@ -158,9 +154,7 @@ namespace Step_Test_3
                         MessageBox.Show(Capacity + ": Poor");
                     }
                 }
-            }
-            if (Femalerb.Checked)
-            {
+ 
                 if ((Age >= 30) && (Age <= 39))
                 {
                     if (Capacity >= 50)
@@ -186,9 +180,7 @@ namespace Step_Test_3
                         MessageBox.Show(Capacity + ": Poor");
                     }
                 }
-            }
-            if (Femalerb.Checked)
-            {
+
                 if ((Age >= 40) && (Age <= 49))
                 {
                     if (Capacity >= 46)
@@ -214,10 +206,7 @@ namespace Step_Test_3
                         MessageBox.Show(Capacity + ": Poor");
                     }
                 }
-            }
 
-            if (Femalerb.Checked)
-            {
                 if ((Age >= 50) && (Age <= 59))
                 {
                     if (Capacity >= 44)
@@ -243,9 +232,7 @@ namespace Step_Test_3
                         MessageBox.Show(Capacity + ": Poor");
                     }
                 }
-            }
-            if (Femalerb.Checked)
-            {
+
                 if ((Age >= 60) && (Age <= 65))
                 {
                     if (Capacity >= 40)
@@ -268,7 +255,7 @@ namespace Step_Test_3
                     }
                     else
                     {
-                        MessageBox.Show(Capacity + ": "Average");
+                        MessageBox.Show(Capacity + ": Average");
                     }
                 }
             }
@@ -301,10 +288,7 @@ namespace Step_Test_3
                         MessageBox.Show(Capacity + ": Poor");
                     }
                 }
-            }
 
-            if (Malerb.Checked)
-            {
                 if ((Age >= 20) && (Age <= 29))
                 {
                     if (Capacity >= 50)
@@ -330,10 +314,7 @@ namespace Step_Test_3
                         MessageBox.Show(Capacity + ": Poor");
                     }
                 }
-            }
 
-            if (Malerb.Checked)
-            {
                 if ((Age >= 30) && (Age <= 39))
                 {
                     if (Capacity >= 46)
@@ -359,14 +340,12 @@ namespace Step_Test_3
                         MessageBox.Show(Capacity + ": Poor");
                     }
                 }
-            }
-            if (Malerb.Checked)
-            {
+
                 if ((Age >= 40) && (Age <= 49))
                 {
                     if (Capacity >= 43)
                     {
-                        MessageBox.Show(Capacity + ": "Excellent");
+                        MessageBox.Show(Capacity + ": Excellent");
 
                     }
                     else if ((Capacity >= 34) && (Capacity <= 42))
@@ -387,10 +366,7 @@ namespace Step_Test_3
                         MessageBox.Show(Capacity + ": Poor");
                     }
                 }
-            }
 
-            if (Malerb.Checked)
-            {
                 if ((Age >= 50) && (Age <= 59))
                 {
                     if (Capacity >= 41)
@@ -417,9 +393,7 @@ namespace Step_Test_3
                     }
                 }
 
-            }
-            if (Malerb.Checked)
-            {
+
                 if ((Age >= 60) && (Age <= 65))
 
                     if (Capacity >= 39)
@@ -452,14 +426,14 @@ namespace Step_Test_3
     private void Clearbtn_Click(object sender, EventArgs e)
     {
         //Reset all inputs to clear
-        HR1num.Value = (0);
-        HR2num.Value = (0);
-        HR3num.Value = (0);
-        HR4num.Value = (0);
-        HR5num.Value = (0);
-        Agenum.Value = (16);
-        Firsttxt.Text = ("");
-        Lasttxt.Text = ("");
+        HR1num.Value = 0;
+        HR2num.Value = 0;
+        HR3num.Value = 0;
+        HR4num.Value = 0;
+        HR5num.Value = 0;
+        Agenum.Value = 16;
+        Firsttxt.Text = "";
+        Lasttxt.Text = "";
         Malerbtn.Checked = false;
         Femalerbtn.Checked = false;
         this.SH15rb.Checked = false;

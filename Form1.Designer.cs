@@ -446,6 +446,7 @@
             this.Calcbtn.TabIndex = 0;
             this.Calcbtn.Text = "Calculate";
             this.Calcbtn.UseVisualStyleBackColor = true;
+            this.Calcbtn.Click += new System.EventHandler(this.Calcbtn_Click);
             // 
             // chart1
             // 
