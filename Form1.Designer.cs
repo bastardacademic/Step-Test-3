@@ -32,7 +32,8 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.Mhr85albl = new System.Windows.Forms.Label();
+            this.TesterNotestxt = new System.Windows.Forms.TextBox();
+            this.TesterNoteslbl = new System.Windows.Forms.Label();
             this.Mhr1lbl = new System.Windows.Forms.Label();
             this.Mhrlbl = new System.Windows.Forms.Label();
             this.Agenum = new System.Windows.Forms.NumericUpDown();
@@ -43,9 +44,11 @@
             this.Firstlbl = new System.Windows.Forms.Label();
             this.TesterInitxt = new System.Windows.Forms.TextBox();
             this.TesterInilbl = new System.Windows.Forms.Label();
+            this.Mhr85albl = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.Femalerb = new System.Windows.Forms.RadioButton();
             this.Malerb = new System.Windows.Forms.RadioButton();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.HR5num = new System.Windows.Forms.NumericUpDown();
             this.HR4num = new System.Windows.Forms.NumericUpDown();
             this.HR3num = new System.Windows.Forms.NumericUpDown();
@@ -67,11 +70,10 @@
             this.Clearbtn = new System.Windows.Forms.Button();
             this.Calcbtn = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.TesterNoteslbl = new System.Windows.Forms.Label();
-            this.TesterNotestxt = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Agenum)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HR5num)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HR4num)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HR3num)).BeginInit();
@@ -101,6 +103,23 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pre-Test Information";
+            // 
+            // TesterNotestxt
+            // 
+            this.TesterNotestxt.Location = new System.Drawing.Point(0, 196);
+            this.TesterNotestxt.Multiline = true;
+            this.TesterNotestxt.Name = "TesterNotestxt";
+            this.TesterNotestxt.Size = new System.Drawing.Size(188, 153);
+            this.TesterNotestxt.TabIndex = 13;
+            // 
+            // TesterNoteslbl
+            // 
+            this.TesterNoteslbl.AutoSize = true;
+            this.TesterNoteslbl.Location = new System.Drawing.Point(6, 180);
+            this.TesterNoteslbl.Name = "TesterNoteslbl";
+            this.TesterNoteslbl.Size = new System.Drawing.Size(75, 13);
+            this.TesterNoteslbl.TabIndex = 12;
+            this.TesterNoteslbl.Text = "Tester\'s Notes";
             // 
             // Mhr1lbl
             // 
@@ -198,33 +217,17 @@
             this.TesterInilbl.TabIndex = 0;
             this.TesterInilbl.Text = "Tester\'s Initials";
             // 
-            // Femalerb
+            // Mhr85albl
             // 
-            this.Femalerb.AutoSize = true;
-            this.Femalerb.Location = new System.Drawing.Point(6, 379);
-            this.Femalerb.Name = "Femalerb";
-            this.Femalerb.Size = new System.Drawing.Size(59, 17);
-            this.Femalerb.TabIndex = 13;
-            this.Femalerb.TabStop = true;
-            this.Femalerb.Text = "Female";
-            this.Femalerb.UseVisualStyleBackColor = true;
-            // 
-            // Malerb
-            // 
-            this.Malerb.AutoSize = true;
-            this.Malerb.Location = new System.Drawing.Point(6, 356);
-            this.Malerb.Name = "Malerb";
-            this.Malerb.Size = new System.Drawing.Size(48, 17);
-            this.Malerb.TabIndex = 12;
-            this.Malerb.TabStop = true;
-            this.Malerb.Text = "Male";
-            this.Malerb.UseVisualStyleBackColor = true;
+            this.Mhr85albl.Location = new System.Drawing.Point(0, 0);
+            this.Mhr85albl.Name = "Mhr85albl";
+            this.Mhr85albl.Size = new System.Drawing.Size(100, 23);
+            this.Mhr85albl.TabIndex = 0;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.Femalerb);
+            this.groupBox3.Controls.Add(this.panel1);
             this.groupBox3.Controls.Add(this.HR5num);
-            this.groupBox3.Controls.Add(this.Malerb);
             this.groupBox3.Controls.Add(this.HR4num);
             this.groupBox3.Controls.Add(this.HR3num);
             this.groupBox3.Controls.Add(this.HR2num);
@@ -246,6 +249,37 @@
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Test Data";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.Femalerb);
+            this.panel1.Controls.Add(this.Malerb);
+            this.panel1.Location = new System.Drawing.Point(6, 346);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(163, 53);
+            this.panel1.TabIndex = 16;
+            // 
+            // Femalerb
+            // 
+            this.Femalerb.AutoSize = true;
+            this.Femalerb.Location = new System.Drawing.Point(3, 25);
+            this.Femalerb.Name = "Femalerb";
+            this.Femalerb.Size = new System.Drawing.Size(59, 17);
+            this.Femalerb.TabIndex = 14;
+            this.Femalerb.TabStop = true;
+            this.Femalerb.Text = "Female";
+            this.Femalerb.UseVisualStyleBackColor = true;
+            // 
+            // Malerb
+            // 
+            this.Malerb.AutoSize = true;
+            this.Malerb.Location = new System.Drawing.Point(3, 3);
+            this.Malerb.Name = "Malerb";
+            this.Malerb.Size = new System.Drawing.Size(48, 17);
+            this.Malerb.TabIndex = 13;
+            this.Malerb.TabStop = true;
+            this.Malerb.Text = "Male";
+            this.Malerb.UseVisualStyleBackColor = true;
             // 
             // HR5num
             // 
@@ -457,6 +491,13 @@
             // 
             // chart1
             // 
+            chartArea2.AxisX.MajorGrid.Interval = 0D;
+            chartArea2.AxisX.Title = "misO2/kg/min";
+            chartArea2.AxisY.Interval = 10D;
+            chartArea2.AxisY.IsStartedFromZero = false;
+            chartArea2.AxisY.Maximum = 200D;
+            chartArea2.AxisY.Minimum = 60D;
+            chartArea2.AxisY.Title = "Heart Rate (beats/min)";
             chartArea2.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
@@ -464,29 +505,14 @@
             this.chart1.Location = new System.Drawing.Point(218, 23);
             this.chart1.Name = "chart1";
             series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series2.Legend = "Legend1";
             series2.Name = "Series1";
+            series2.YValuesPerPoint = 10;
             this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(645, 430);
             this.chart1.TabIndex = 4;
             this.chart1.Text = "chart1";
-            // 
-            // TesterNoteslbl
-            // 
-            this.TesterNoteslbl.AutoSize = true;
-            this.TesterNoteslbl.Location = new System.Drawing.Point(6, 180);
-            this.TesterNoteslbl.Name = "TesterNoteslbl";
-            this.TesterNoteslbl.Size = new System.Drawing.Size(75, 13);
-            this.TesterNoteslbl.TabIndex = 12;
-            this.TesterNoteslbl.Text = "Tester\'s Notes";
-            // 
-            // TesterNotestxt
-            // 
-            this.TesterNotestxt.Location = new System.Drawing.Point(0, 196);
-            this.TesterNotestxt.Multiline = true;
-            this.TesterNotestxt.Name = "TesterNotestxt";
-            this.TesterNotestxt.Size = new System.Drawing.Size(188, 153);
-            this.TesterNotestxt.TabIndex = 13;
             // 
             // Form1
             // 
@@ -499,11 +525,14 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Agenum)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HR5num)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.HR4num)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.HR3num)).EndInit();
@@ -551,10 +580,11 @@
         private System.Windows.Forms.Button Clearbtn;
         private System.Windows.Forms.Button Calcbtn;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.RadioButton Femalerb;
-        private System.Windows.Forms.RadioButton Malerb;
         private System.Windows.Forms.TextBox TesterNotestxt;
         private System.Windows.Forms.Label TesterNoteslbl;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton Femalerb;
+        private System.Windows.Forms.RadioButton Malerb;
     }
 }
 

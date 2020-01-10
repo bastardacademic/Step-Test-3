@@ -66,6 +66,16 @@ namespace Step_Test_3
             this.Mhr85 = (Mhr * (decimal)0.85);
             Mhr50 = Mhr * (decimal)0.5;
 
+            //Selects correct X-axis values
+            if (SH15rb.Checked == true)
+                SH15rb_CheckedChanged();
+            else if (SH20rb.Checked == true)
+                SH20rb_CheckedChanged();
+            else if (SH25rb.Checked == true)
+                SH25rb_CheckedChanged();
+            else if (SH30rb.Checked == true)
+                SH30rb_CheckedChanged();
+
             //Sets Max values for Heart Rate input
             HR1num.Maximum = Mhr85;
             HR2num.Maximum = Mhr85;
@@ -88,24 +98,17 @@ namespace Step_Test_3
             axisXY[4] = axisY[4] * axisX[4];
 
             //Checks all array elements are valid or sets them to 0
-            decimal position = Array.IndexOf(axisY, Mhr);
-            if (position < Mhr)
+            decimal position = Array.IndexOf(axisY, Mhr50);
+            if (position < Mhr50)
             {
-                position = 0;
+                position = '';
             }
 
-            Chart1.Series.Points.DataBindXY(axisX, axisY);
-
-            //Sums of the arrays
+             //Sums of the arrays
             decimal SumX = axisX.Sum();
             decimal SumY = axisY.Sum();
             decimal SumXY = axisXY.Sum();
             //Means of X and Y Sum arrays
-
-            if (position == 0)
-            {
-                return;
-            }
 
             decimal SYMean = SumY / position;
             //Calculate Slope and Y Intercept
@@ -114,14 +117,20 @@ namespace Step_Test_3
             //Calculates the Aerobic Capacity
             decimal Capacity = (Mhr - Yintercept) / Slope;
 
+            //Chooses correct fitness rating selection
             if (Femalerb.Checked == true)
-                Femalerb_CheckedChanged();
-            sex = "Female";
-            else
-                Malerb_CheckedChanged();
-            sex = "Male";
+            {
+                Femalerb_CheckedChanged(Capacity);
+                sex = "Female";
+            }
+            else if (Malerb.Checked == true)
+            {
+                Malerb_CheckedChanged(Capacity);
+                sex = "Male";
+            }
+                
         }
-        private void Femalerb_CheckedChanged(object sender, EventArgs e, decimal Capacity)
+        public void Femalerb_CheckedChanged(decimal Capacity)
         {
             if ((Age >= 15) && (Age <= 19))
             {
@@ -280,7 +289,7 @@ namespace Step_Test_3
             }
         }
 
-        public void Malerb_CheckedChanged(object sender, EventArgs e, decimal Capacity)
+        public void Malerb_CheckedChanged(decimal Capacity)
         {
             if ((Age >= 15) && (Age <= 19))
             {
@@ -472,7 +481,6 @@ namespace Step_Test_3
             cmd.Parameters.AddWithValue("@Sex", sex);
             cmd.Parameters.AddWithValue("@Tester Initials", TesterInitxt.Text);
             cmd.Parameters.AddWithValue("@Tester Notes", TesterNotestxt.Text);
-            cmd.Parameters.AddWithValue("@Step Height", textBox4.Text);
             SqlParameter sqlParameter = cmd.Parameters.AddWithValue("@Aerobic Capacity", Capacity);
             con.Open();
             int i = cmd.ExecuteNonQuery();
@@ -482,6 +490,16 @@ namespace Step_Test_3
             {
                 MessageBox.Show(i + "Data Saved");
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            chart1.Series[0].Points.Clear();
+            chart1.Series["Max"].Points.AddY(60, 210);
+            chart1.Series[0].Points.AddXY(axisX);
+            chart1.Series["Max"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            chart1.Series["Max"].BorderWidth = 3;
+            chart1.Series["Max"].Color = Color.Red;
         }
     }
 }
