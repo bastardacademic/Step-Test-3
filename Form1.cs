@@ -23,6 +23,8 @@ namespace Step_Test_3
         private decimal[] axisX = { 0, 0, 0, 0, 0 };
         private decimal[] axisXY = { 0, 0, 0, 0, 0 };
 
+        private string sex = "";
+
         //Sets time and date stamp for database record
         private DateTime localDate = DateTime.Now;
 
@@ -70,7 +72,7 @@ namespace Step_Test_3
             HR3num.Maximum = Mhr85;
             HR4num.Maximum = Mhr85;
             HR5num.Maximum = Mhr85;
-           
+
             //Places Heart Rate values into array
             axisY[0] = HR1num.Value;
             axisY[1] = HR2num.Value;
@@ -111,6 +113,13 @@ namespace Step_Test_3
             decimal Yintercept = SYMean - (Slope * SYMean);
             //Calculates the Aerobic Capacity
             decimal Capacity = (Mhr - Yintercept) / Slope;
+
+            if (Femalerb.Checked == true)
+                Femalerb_CheckedChanged();
+            sex = "Female";
+            else
+                Malerb_CheckedChanged();
+            sex = "Male";
         }
         private void Femalerb_CheckedChanged(object sender, EventArgs e, decimal Capacity)
         {
@@ -271,7 +280,7 @@ namespace Step_Test_3
             }
         }
 
-        private void Malerb_CheckedChanged(object sender, EventArgs e, decimal Capacity)
+        public void Malerb_CheckedChanged(object sender, EventArgs e, decimal Capacity)
         {
             if ((Age >= 15) && (Age <= 19))
             {
@@ -451,7 +460,7 @@ namespace Step_Test_3
             Mhr1lbl.Text = "";
         }
 
-        private void Savebtn_Click(object sender, EventArgs e)
+        private void Savebtn_Click(object sender, EventArgs e, decimal Capacity, string sex)
         {
             //Save to Database
             SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;D:\MEGAsync\GitHub\Step Test 3\StepResults.mdf;Integrated Security=True;User Instance=True");
@@ -460,7 +469,7 @@ namespace Step_Test_3
             cmd.Parameters.AddWithValue("@First Name", Firsttxt.Text);
             cmd.Parameters.AddWithValue("@Last Name", Lasttxt.Text);
             cmd.Parameters.AddWithValue("@Age", Agenum.Value);
-            cmd.Parameters.AddWithValue("@Sex", textBox4.Text);
+            cmd.Parameters.AddWithValue("@Sex", sex);
             cmd.Parameters.AddWithValue("@Tester Initials", TesterInitxt.Text);
             cmd.Parameters.AddWithValue("@Tester Notes", TesterNotestxt.Text);
             cmd.Parameters.AddWithValue("@Step Height", textBox4.Text);
