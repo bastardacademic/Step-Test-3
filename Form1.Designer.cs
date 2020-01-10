@@ -32,6 +32,8 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Femalerb = new System.Windows.Forms.RadioButton();
+            this.Malerb = new System.Windows.Forms.RadioButton();
             this.Mhr85albl = new System.Windows.Forms.Label();
             this.Mhr85lbl = new System.Windows.Forms.Label();
             this.Mhr1lbl = new System.Windows.Forms.Label();
@@ -66,8 +68,6 @@
             this.Clearbtn = new System.Windows.Forms.Button();
             this.Calcbtn = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.Malerb = new System.Windows.Forms.RadioButton();
-            this.Femalerb = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Agenum)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -102,6 +102,28 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pre-Test Information";
+            // 
+            // Femalerb
+            // 
+            this.Femalerb.AutoSize = true;
+            this.Femalerb.Location = new System.Drawing.Point(7, 235);
+            this.Femalerb.Name = "Femalerb";
+            this.Femalerb.Size = new System.Drawing.Size(59, 17);
+            this.Femalerb.TabIndex = 13;
+            this.Femalerb.TabStop = true;
+            this.Femalerb.Text = "Female";
+            this.Femalerb.UseVisualStyleBackColor = true;
+            // 
+            // Malerb
+            // 
+            this.Malerb.AutoSize = true;
+            this.Malerb.Location = new System.Drawing.Point(7, 212);
+            this.Malerb.Name = "Malerb";
+            this.Malerb.Size = new System.Drawing.Size(48, 17);
+            this.Malerb.TabIndex = 12;
+            this.Malerb.TabStop = true;
+            this.Malerb.Text = "Male";
+            this.Malerb.UseVisualStyleBackColor = true;
             // 
             // Mhr85albl
             // 
@@ -437,6 +459,7 @@
             this.Clearbtn.TabIndex = 1;
             this.Clearbtn.Text = "Clear";
             this.Clearbtn.UseVisualStyleBackColor = true;
+            this.Clearbtn.Click += new System.EventHandler(this.Clearbtn_Click);
             // 
             // Calcbtn
             // 
@@ -463,28 +486,6 @@
             this.chart1.Size = new System.Drawing.Size(645, 430);
             this.chart1.TabIndex = 4;
             this.chart1.Text = "chart1";
-            // 
-            // Malerb
-            // 
-            this.Malerb.AutoSize = true;
-            this.Malerb.Location = new System.Drawing.Point(7, 212);
-            this.Malerb.Name = "Malerb";
-            this.Malerb.Size = new System.Drawing.Size(48, 17);
-            this.Malerb.TabIndex = 12;
-            this.Malerb.TabStop = true;
-            this.Malerb.Text = "Male";
-            this.Malerb.UseVisualStyleBackColor = true;
-            // 
-            // Femalerb
-            // 
-            this.Femalerb.AutoSize = true;
-            this.Femalerb.Location = new System.Drawing.Point(7, 235);
-            this.Femalerb.Name = "Femalerb";
-            this.Femalerb.Size = new System.Drawing.Size(59, 17);
-            this.Femalerb.TabIndex = 13;
-            this.Femalerb.TabStop = true;
-            this.Femalerb.Text = "Female";
-            this.Femalerb.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
