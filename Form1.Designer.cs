@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Mhr85albl = new System.Windows.Forms.Label();
             this.Mhr85lbl = new System.Windows.Forms.Label();
@@ -66,6 +66,8 @@
             this.Clearbtn = new System.Windows.Forms.Button();
             this.Calcbtn = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.Malerb = new System.Windows.Forms.RadioButton();
+            this.Femalerb = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Agenum)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -80,6 +82,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.Femalerb);
+            this.groupBox1.Controls.Add(this.Malerb);
             this.groupBox1.Controls.Add(this.Mhr85albl);
             this.groupBox1.Controls.Add(this.Mhr85lbl);
             this.groupBox1.Controls.Add(this.Mhr1lbl);
@@ -92,9 +96,9 @@
             this.groupBox1.Controls.Add(this.Firstlbl);
             this.groupBox1.Controls.Add(this.TesterInitxt);
             this.groupBox1.Controls.Add(this.TesterInilbl);
-            this.groupBox1.Location = new System.Drawing.Point(12, 130);
+            this.groupBox1.Location = new System.Drawing.Point(12, 23);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 216);
+            this.groupBox1.Size = new System.Drawing.Size(200, 265);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pre-Test Information";
@@ -230,9 +234,9 @@
             this.groupBox3.Controls.Add(this.SH25rb);
             this.groupBox3.Controls.Add(this.SH20rb);
             this.groupBox3.Controls.Add(this.SH15rb);
-            this.groupBox3.Location = new System.Drawing.Point(881, 130);
+            this.groupBox3.Location = new System.Drawing.Point(881, 23);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(175, 364);
+            this.groupBox3.Size = new System.Drawing.Size(175, 430);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Test Data";
@@ -409,7 +413,7 @@
             this.groupBox2.Controls.Add(this.Savebtn);
             this.groupBox2.Controls.Add(this.Clearbtn);
             this.groupBox2.Controls.Add(this.Calcbtn);
-            this.groupBox2.Location = new System.Drawing.Point(12, 366);
+            this.groupBox2.Location = new System.Drawing.Point(12, 294);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 134);
             this.groupBox2.TabIndex = 3;
@@ -445,19 +449,41 @@
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(218, 130);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(218, 23);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(645, 364);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(645, 430);
             this.chart1.TabIndex = 4;
             this.chart1.Text = "chart1";
+            // 
+            // Malerb
+            // 
+            this.Malerb.AutoSize = true;
+            this.Malerb.Location = new System.Drawing.Point(7, 212);
+            this.Malerb.Name = "Malerb";
+            this.Malerb.Size = new System.Drawing.Size(48, 17);
+            this.Malerb.TabIndex = 12;
+            this.Malerb.TabStop = true;
+            this.Malerb.Text = "Male";
+            this.Malerb.UseVisualStyleBackColor = true;
+            // 
+            // Femalerb
+            // 
+            this.Femalerb.AutoSize = true;
+            this.Femalerb.Location = new System.Drawing.Point(7, 235);
+            this.Femalerb.Name = "Femalerb";
+            this.Femalerb.Size = new System.Drawing.Size(59, 17);
+            this.Femalerb.TabIndex = 13;
+            this.Femalerb.TabStop = true;
+            this.Femalerb.Text = "Female";
+            this.Femalerb.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -523,6 +549,8 @@
         private System.Windows.Forms.Button Clearbtn;
         private System.Windows.Forms.Button Calcbtn;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.RadioButton Femalerb;
+        private System.Windows.Forms.RadioButton Malerb;
     }
 }
 
