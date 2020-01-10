@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Step_Test_3
 {
@@ -15,6 +17,7 @@ namespace Step_Test_3
         private decimal Age = 0;
         private decimal Mhr50 = 0;
         private decimal Mhr = 0;
+        private decimal Mhr85 = 0;
 
         private decimal[] axisY = { 0, 0, 0, 0, 0 };
         private decimal[] axisX = { 0, 0, 0, 0, 0 };
@@ -57,10 +60,17 @@ namespace Step_Test_3
         {
             Age = Agenum.Value;
             Mhr = 220 - Age;
-            this.Mhrlbl.Text = Mhr.ToString();
-            this.Mhr85albl.Text = (Mhr * (decimal)0.85).ToString();
+            this.Mhr1lbl.Text = Mhr.ToString();
+            this.Mhr85 = (Mhr * (decimal)0.85);
             Mhr50 = Mhr * (decimal)0.5;
 
+            //Sets Max values for Heart Rate input
+            HR1num.Maximum = Mhr85;
+            HR2num.Maximum = Mhr85;
+            HR3num.Maximum = Mhr85;
+            HR4num.Maximum = Mhr85;
+            HR5num.Maximum = Mhr85;
+           
             //Places Heart Rate values into array
             axisY[0] = HR1num.Value;
             axisY[1] = HR2num.Value;
@@ -82,6 +92,8 @@ namespace Step_Test_3
                 position = 0;
             }
 
+            Chart1.Series.Points.DataBindXY(axisX, axisY);
+
             //Sums of the arrays
             decimal SumX = axisX.Sum();
             decimal SumY = axisY.Sum();
@@ -99,163 +111,162 @@ namespace Step_Test_3
             decimal Yintercept = SYMean - (Slope * SYMean);
             //Calculates the Aerobic Capacity
             decimal Capacity = (Mhr - Yintercept) / Slope;
-
-            private void Femalerb_CheckedChanged(object sender, EventArgs e, decimal Capacity)
+        }
+        private void Femalerb_CheckedChanged(object sender, EventArgs e, decimal Capacity)
+        {
+            if ((Age >= 15) && (Age <= 19))
             {
-                if ((Age >= 15) && (Age <= 19))
+                if (Capacity >= 60)
                 {
-                    if (Capacity >= 60)
-                    {
-                        MessageBox.Show(Capacity + ": Excellent");
+                    MessageBox.Show(Capacity + ": Excellent");
 
-                    }
-                    else if ((Capacity >= 48) && (Capacity <= 59))
-                    {
-                        MessageBox.Show(Capacity + ": Good");
-
-                    }
-                    else if ((Capacity >= 39) && (Capacity <= 47))
-                    {
-                        MessageBox.Show(Capacity + ": Average");
-                    }
-                    else if ((Capacity >= 30) && (Capacity <= 38))
-                    {
-                        MessageBox.Show(Capacity + ": Below Average");
-                    }
-                    else
-                    {
-                        MessageBox.Show(Capacity + ": Poor");
-                    }
                 }
-
-                if ((Age >= 20) && (Age <= 29))
+                else if ((Capacity >= 48) && (Capacity <= 59))
                 {
-                    if (Capacity >= 55)
-                    {
-                        MessageBox.Show(Capacity + ": Excellent");
+                    MessageBox.Show(Capacity + ": Good");
 
-                    }
-                    else if ((Capacity >= 44) && (Capacity <= 54))
-                    {
-                        MessageBox.Show(Capacity + ": Good");
-
-                    }
-                    else if ((Capacity >= 35) && (Capacity <= 43))
-                    {
-                        MessageBox.Show(Capacity + ": Average");
-                    }
-                    else if ((Capacity >= 28) && (Capacity <= 34))
-                    {
-                        MessageBox.Show(Capacity + ": Below Average");
-                    }
-                    else
-                    {
-                        MessageBox.Show(Capacity + ": Poor");
-                    }
                 }
-
-                if ((Age >= 30) && (Age <= 39))
+                else if ((Capacity >= 39) && (Capacity <= 47))
                 {
-                    if (Capacity >= 50)
-                    {
-                        MessageBox.Show(Capacity + ": Excellent");
-
-                    }
-                    else if ((Capacity >= 40) && (Capacity <= 49))
-                    {
-                        MessageBox.Show(Capacity + ": Good");
-
-                    }
-                    else if ((Capacity >= 34) && (Capacity <= 39))
-                    {
-                        MessageBox.Show(Capacity + ": Average");
-                    }
-                    else if ((Capacity >= 26) && (Capacity <= 33))
-                    {
-                        MessageBox.Show(Capacity + ": Below Average");
-                    }
-                    else
-                    {
-                        MessageBox.Show(Capacity + ": Poor");
-                    }
+                    MessageBox.Show(Capacity + ": Average");
                 }
-
-                if ((Age >= 40) && (Age <= 49))
+                else if ((Capacity >= 30) && (Capacity <= 38))
                 {
-                    if (Capacity >= 46)
-                    {
-                        MessageBox.Show(Capacity + ": Excellent");
-
-                    }
-                    else if ((Capacity >= 37) && (Capacity <= 45))
-                    {
-                        MessageBox.Show(Capacity + ": Good");
-
-                    }
-                    else if ((Capacity >= 32) && (Capacity <= 36))
-                    {
-                        MessageBox.Show(Capacity + ": Average");
-                    }
-                    else if ((Capacity >= 25) && (Capacity <= 32))
-                    {
-                        MessageBox.Show(Capacity + ": Below Average");
-                    }
-                    else
-                    {
-                        MessageBox.Show(Capacity + ": Poor");
-                    }
+                    MessageBox.Show(Capacity + ": Below Average");
                 }
-
-                if ((Age >= 50) && (Age <= 59))
+                else
                 {
-                    if (Capacity >= 44)
-                    {
-                        MessageBox.Show(Capacity + ": Excellent");
-
-                    }
-                    else if ((Capacity >= 35) && (Capacity <= 43))
-                    {
-                        MessageBox.Show(Capacity + ": Good");
-
-                    }
-                    else if ((Capacity >= 29) && (Capacity <= 34))
-                    {
-                        MessageBox.Show(Capacity + ": Average");
-                    }
-                    else if ((Capacity >= 23) && (Capacity <= 28))
-                    {
-                        MessageBox.Show("Below Average");
-                    }
-                    else
-                    {
-                        MessageBox.Show(Capacity + ": Poor");
-                    }
+                    MessageBox.Show(Capacity + ": Poor");
                 }
+            }
 
-                if ((Age >= 60) && (Age <= 65))
+            if ((Age >= 20) && (Age <= 29))
+            {
+                if (Capacity >= 55)
                 {
-                    if (Capacity >= 40)
-                    {
-                        MessageBox.Show(Capacity + ": Excellent");
+                    MessageBox.Show(Capacity + ": Excellent");
 
-                    }
-                    else if ((Capacity >= 33) && (Capacity <= 39))
-                    {
-                        MessageBox.Show(Capacity + ": Good");
+                }
+                else if ((Capacity >= 44) && (Capacity <= 54))
+                {
+                    MessageBox.Show(Capacity + ": Good");
 
-                    }
-                    else if ((Capacity >= 25) && (Capacity <= 32))
-                    {
-                        MessageBox.Show(Capacity + ": Average");
-                    }
-                    else if ((Capacity >= 20) && (Capacity <= 24))
-                    {
-                        MessageBox.Show(Capacity + ": Below Average");
-                    }
-                    else
-                    {
-                        MessageBox.Show(Capacity + ": Average");
-                    }
+                }
+                else if ((Capacity >= 35) && (Capacity <= 43))
+                {
+                    MessageBox.Show(Capacity + ": Average");
+                }
+                else if ((Capacity >= 28) && (Capacity <= 34))
+                {
+                    MessageBox.Show(Capacity + ": Below Average");
+                }
+                else
+                {
+                    MessageBox.Show(Capacity + ": Poor");
+                }
+            }
+
+            if ((Age >= 30) && (Age <= 39))
+            {
+                if (Capacity >= 50)
+                {
+                    MessageBox.Show(Capacity + ": Excellent");
+
+                }
+                else if ((Capacity >= 40) && (Capacity <= 49))
+                {
+                    MessageBox.Show(Capacity + ": Good");
+
+                }
+                else if ((Capacity >= 34) && (Capacity <= 39))
+                {
+                    MessageBox.Show(Capacity + ": Average");
+                }
+                else if ((Capacity >= 26) && (Capacity <= 33))
+                {
+                    MessageBox.Show(Capacity + ": Below Average");
+                }
+                else
+                {
+                    MessageBox.Show(Capacity + ": Poor");
+                }
+            }
+
+            if ((Age >= 40) && (Age <= 49))
+            {
+                if (Capacity >= 46)
+                {
+                    MessageBox.Show(Capacity + ": Excellent");
+
+                }
+                else if ((Capacity >= 37) && (Capacity <= 45))
+                {
+                    MessageBox.Show(Capacity + ": Good");
+
+                }
+                else if ((Capacity >= 32) && (Capacity <= 36))
+                {
+                    MessageBox.Show(Capacity + ": Average");
+                }
+                else if ((Capacity >= 25) && (Capacity <= 32))
+                {
+                    MessageBox.Show(Capacity + ": Below Average");
+                }
+                else
+                {
+                    MessageBox.Show(Capacity + ": Poor");
+                }
+            }
+
+            if ((Age >= 50) && (Age <= 59))
+            {
+                if (Capacity >= 44)
+                {
+                    MessageBox.Show(Capacity + ": Excellent");
+
+                }
+                else if ((Capacity >= 35) && (Capacity <= 43))
+                {
+                    MessageBox.Show(Capacity + ": Good");
+
+                }
+                else if ((Capacity >= 29) && (Capacity <= 34))
+                {
+                    MessageBox.Show(Capacity + ": Average");
+                }
+                else if ((Capacity >= 23) && (Capacity <= 28))
+                {
+                    MessageBox.Show("Below Average");
+                }
+                else
+                {
+                    MessageBox.Show(Capacity + ": Poor");
+                }
+            }
+
+            if ((Age >= 60) && (Age <= 65))
+            {
+                if (Capacity >= 40)
+                {
+                    MessageBox.Show(Capacity + ": Excellent");
+
+                }
+                else if ((Capacity >= 33) && (Capacity <= 39))
+                {
+                    MessageBox.Show(Capacity + ": Good");
+
+                }
+                else if ((Capacity >= 25) && (Capacity <= 32))
+                {
+                    MessageBox.Show(Capacity + ": Average");
+                }
+                else if ((Capacity >= 20) && (Capacity <= 24))
+                {
+                    MessageBox.Show(Capacity + ": Below Average");
+                }
+                else
+                {
+                    MessageBox.Show(Capacity + ": Average");
                 }
             }
         }
@@ -437,14 +448,31 @@ namespace Step_Test_3
             SH25rb.Checked = false;
             SH30rb.Checked = false;
             Mhrlbl.Text = "Max Heart Rate (bpm)";
-            Mhr85lbl.Text = "85% MHR (bpm)";
             Mhr1lbl.Text = "";
-            Mhr85albl.Text = "";
-
         }
+
         private void Savebtn_Click(object sender, EventArgs e)
         {
+            //Save to Database
+            SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;D:\MEGAsync\GitHub\Step Test 3\StepResults.mdf;Integrated Security=True;User Instance=True");
+            SqlCommand cmd = new SqlCommand("sp_insert", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@First Name", Firsttxt.Text);
+            cmd.Parameters.AddWithValue("@Last Name", Lasttxt.Text);
+            cmd.Parameters.AddWithValue("@Age", Agenum.Value);
+            cmd.Parameters.AddWithValue("@Sex", textBox4.Text);
+            cmd.Parameters.AddWithValue("@Tester Initials", TesterInitxt.Text);
+            cmd.Parameters.AddWithValue("@Tester Notes", TesterNotestxt.Text);
+            cmd.Parameters.AddWithValue("@Step Height", textBox4.Text);
+            SqlParameter sqlParameter = cmd.Parameters.AddWithValue("@Aerobic Capacity", Capacity);
+            con.Open();
+            int i = cmd.ExecuteNonQuery();
+            con.Close();
 
+            if (i != 0)
+            {
+                MessageBox.Show(i + "Data Saved");
+            }
         }
     }
 }

@@ -1,0 +1,9 @@
+D:\MEGAsync\GitHub\Step Test 3\bin\Debug\Step Test 3.exe.config
+D:\MEGAsync\GitHub\Step Test 3\bin\Debug\Step Test 3.exe
+D:\MEGAsync\GitHub\Step Test 3\bin\Debug\Step Test 3.pdb
+D:\MEGAsync\GitHub\Step Test 3\obj\Debug\Step Test 3.csprojAssemblyReference.cache
+D:\MEGAsync\GitHub\Step Test 3\obj\Debug\Step_Test_3.Form1.resources
+D:\MEGAsync\GitHub\Step Test 3\obj\Debug\Step_Test_3.Properties.Resources.resources
+D:\MEGAsync\GitHub\Step Test 3\obj\Debug\Step Test 3.csproj.GenerateResource.cache
+D:\MEGAsync\GitHub\Step Test 3\obj\Debug\Step Test 3.exe
+D:\MEGAsync\GitHub\Step Test 3\obj\Debug\Step Test 3.pdb
