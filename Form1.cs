@@ -68,13 +68,13 @@ namespace Step_Test_3
 
             //Selects correct X-axis values
             if (SH15rb.Checked == true)
-                SH15rb_CheckedChanged();
+                SH15rb_CheckedChanged(null, null);
             else if (SH20rb.Checked == true)
-                SH20rb_CheckedChanged();
+                SH20rb_CheckedChanged(null, null);
             else if (SH25rb.Checked == true)
-                SH25rb_CheckedChanged();
+                SH25rb_CheckedChanged(null, null);
             else if (SH30rb.Checked == true)
-                SH30rb_CheckedChanged();
+                SH30rb_CheckedChanged(null, null);
 
             //Sets Max values for Heart Rate input
             HR1num.Maximum = Mhr85;
@@ -101,15 +101,14 @@ namespace Step_Test_3
             decimal position = Array.IndexOf(axisY, Mhr50);
             if (position < Mhr50)
             {
-                position = '';
+                position = 1;
             }
 
-             //Sums of the arrays
+            //Sums of the arrays
             decimal SumX = axisX.Sum();
             decimal SumY = axisY.Sum();
             decimal SumXY = axisXY.Sum();
             //Means of X and Y Sum arrays
-
             decimal SYMean = SumY / position;
             //Calculate Slope and Y Intercept
             decimal Slope = SumXY - (SumXY / position / (SumXSquared(axisX) - (SumXSquared(axisX) / position)));
@@ -127,9 +126,9 @@ namespace Step_Test_3
             {
                 Malerb_CheckedChanged(Capacity);
                 sex = "Male";
-            }
-                
+            }            
         }
+
         public void Femalerb_CheckedChanged(decimal Capacity)
         {
             if ((Age >= 15) && (Age <= 19))
