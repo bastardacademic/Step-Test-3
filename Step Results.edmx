@@ -27,7 +27,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StepResultsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Result">
+        <EntityType Name="Results">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -42,7 +42,7 @@
           <Property Name="Age" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityContainer Name="StepResultsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Results" EntityType="Self.Result" />
+          <EntitySet Name="Results1" EntityType="StepResultsModel.Results" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -50,8 +50,8 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="StepResultsModelStoreContainer" CdmEntityContainer="StepResultsEntities">
-          <EntitySetMapping Name="Results">
-            <EntityTypeMapping TypeName="StepResultsModel.Result">
+          <EntitySetMapping Name="Results1">
+            <EntityTypeMapping TypeName="StepResultsModel.Results">
               <MappingFragment StoreEntitySet="Results">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="First_Name" ColumnName="First Name" />

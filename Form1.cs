@@ -20,7 +20,7 @@ namespace Step_Test_3
         private decimal Mhr85 = 0;
 
         private decimal[] axisY = { 0, 0, 0, 0, 0 };
-        private decimal[] axisX = { 0, 0, 0, 0, 0 };
+        private decimal[] axisX = null;
         private decimal[] axisXY = { 0, 0, 0, 0, 0 };
 
         private string sex = "";
@@ -36,45 +36,31 @@ namespace Step_Test_3
         //Sets X array with values determined by Step Height
         public void SH15rb_CheckedChanged(object sender, EventArgs e)
         {
-            decimal[] axisX = { 11, 14, 18, 21, 25 };
+            axisX = new decimal[] { 11, 14, 18, 21, 25 };
         }
 
         public void SH20rb_CheckedChanged(object sender, EventArgs e)
         {
-            decimal[] axisX = { 12, 17, 21, 25, 29 };
+            axisX = new decimal[] { 12, 17, 21, 25, 29 };
         }
 
         public void SH25rb_CheckedChanged(object sender, EventArgs e)
         {
-            decimal[] axisX = { 14, 19, 24, 28, 33 };
+            axisX = new decimal[] { 14, 19, 24, 28, 33 };
         }
 
         public void SH30rb_CheckedChanged(object sender, EventArgs e)
         {
-            decimal[] axisX = { 16, 21, 27, 32, 37 };
+            axisX = new decimal[] { 16, 21, 27, 32, 37 };
         }
 
-        public decimal SumXSquared(IEnumerable<decimal> list)
-        {
-            return (decimal)Math.Pow((double)list.Sum(), 2);
-        }
         public void Calcbtn_Click(object sender, EventArgs e)
         {
-            Age = Agenum.Value;
-            Mhr = 220 - Age;
+            decimal Age = Agenum.Value;
+            decimal Mhr = 220 - Age;
             this.Mhr1lbl.Text = Mhr.ToString();
-            this.Mhr85 = (Mhr * (decimal)0.85);
-            Mhr50 = Mhr * (decimal)0.5;
-
-            //Selects correct X-axis values
-            if (SH15rb.Checked == true)
-                SH15rb_CheckedChanged(null, null);
-            else if (SH20rb.Checked == true)
-                SH20rb_CheckedChanged(null, null);
-            else if (SH25rb.Checked == true)
-                SH25rb_CheckedChanged(null, null);
-            else if (SH30rb.Checked == true)
-                SH30rb_CheckedChanged(null, null);
+            decimal Mhr85 = (Mhr * (decimal)0.85);
+            decimal Mhr50 = Mhr * (decimal)0.5;
 
             //Sets Max values for Heart Rate input
             HR1num.Maximum = Mhr85;
@@ -82,6 +68,13 @@ namespace Step_Test_3
             HR3num.Maximum = Mhr85;
             HR4num.Maximum = Mhr85;
             HR5num.Maximum = Mhr85;
+
+            //Sets Minimun Heart Rate Values
+            HR1num.Minimum = 60;
+            HR2num.Minimum = 60;
+            HR3num.Minimum = 60;
+            HR4num.Minimum = 60;
+            HR5num.Minimum = 60;
 
             //Places Heart Rate values into array
             axisY[0] = HR1num.Value;
@@ -97,364 +90,394 @@ namespace Step_Test_3
             axisXY[3] = axisY[3] * axisX[3];
             axisXY[4] = axisY[4] * axisX[4];
 
-            //Checks all array elements are valid or sets them to 0
+            //Checks all array elements are valid or sets them to 1
+            //As cannot divide by 0, and cannot null a decimal value
             decimal position = Array.IndexOf(axisY, Mhr50);
             if (position < Mhr50)
             {
                 position = 1;
             }
 
+            decimal DataPo = 5;
+
+            decimal SumXSquared()
+            {
+                decimal SumX2 = 0 ;
+                foreach (var item in axisX)
+                {
+                    SumX2 += item * item;
+                }
+                return SumX2; 
+            }
+
             //Sums of the arrays
             decimal SumX = axisX.Sum();
             decimal SumY = axisY.Sum();
             decimal SumXY = axisXY.Sum();
+            decimal SumXSquare = SumXSquared();
+
             //Means of X and Y Sum arrays
-            decimal SYMean = SumY / position;
+            decimal YMean = SumY / DataPo;
+            decimal XMean = SumX / DataPo;
+
             //Calculate Slope and Y Intercept
-            decimal Slope = SumXY - (SumXY / position / (SumXSquared(axisX) - (SumXSquared(axisX) / position)));
-            decimal Yintercept = SYMean - (Slope * SYMean);
+            //Slope Calculation split  to get correct results
+            decimal SlopeTop = SumXY - ((SumX * SumY) / DataPo);
+            decimal SlopeBottom = SumXSquare - ((SumX * SumX) / DataPo);
+            decimal Slope = SlopeTop / SlopeBottom;
+            decimal Yintercept = YMean - (Slope * XMean);
+
             //Calculates the Aerobic Capacity
             decimal Capacity = (Mhr - Yintercept) / Slope;
+            //Converts Capacity to nteger for clearer display
+            int Result = (int) Capacity;
+
+            //Chart setup to dispay data and line of best fit
+            chart1.Series.Add("Data");
+            chart1.Series.Add("Line of best fit");
+            chart1.Series[0].ChartType = SeriesChartType.Point;
+            chart1.Series[1].ChartType = SeriesChartType.Line;
+            
+            List<decimal> Xaxis = new List<decimal>();
+            Xaxis.AddRange(axisX);
+
+            List<decimal> Yaxis = new List<decimal>();
+            Yaxis.AddRange(axisY);
+
+            //Finds smallest and largest points in list
+            decimal minX = Xaxis.ToList().Min();
+            decimal maxX = Xaxis.ToList().Max();
+
+            for (int i = 0; i < Xaxis.Count; i++)
+            {
+                chart1.Series[0].Points.AddXY(Xaxis[i], Yaxis[i]);
+            }
+            // Plots the Line of Best Fit
+            chart1.Series[1].Points.AddXY(minX, Yintercept + minX * Slope);
+            chart1.Series[1].Points.AddXY(maxX, Yintercept + maxX * Slope);
+            //chart1.Series[1].Points.AddXY(Capacity, Yintercept + maxX * Slope);
+
+            //MessageBox.Show("Your Aerobic Capacity is: " + Result.ToString());
 
             //Chooses correct fitness rating selection
             if (Femalerb.Checked == true)
             {
-                Femalerb_CheckedChanged(Capacity);
+                Female(Result);
                 sex = "Female";
             }
             else if (Malerb.Checked == true)
             {
-                Malerb_CheckedChanged(Capacity);
+                Male(Result);
                 sex = "Male";
-            }            
+            }
         }
 
-        public void Femalerb_CheckedChanged(decimal Capacity)
+        public void Female(int Result)
         {
+            decimal Age = Agenum.Value;
+
             if ((Age >= 15) && (Age <= 19))
             {
-                if (Capacity >= 60)
+                if (Result >= 60)
                 {
-                    MessageBox.Show(Capacity + ": Excellent");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Excellent");
                 }
-                else if ((Capacity >= 48) && (Capacity <= 59))
+                else if ((Result >= 48) && (Result <= 59))
                 {
-                    MessageBox.Show(Capacity + ": Good");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Good");
                 }
-                else if ((Capacity >= 39) && (Capacity <= 47))
+                else if ((Result >= 39) && (Result <= 47))
                 {
-                    MessageBox.Show(Capacity + ": Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Average");
                 }
-                else if ((Capacity >= 30) && (Capacity <= 38))
+                else if ((Result >= 30) && (Result <= 38))
                 {
-                    MessageBox.Show(Capacity + ": Below Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Below Average");
                 }
                 else
                 {
-                    MessageBox.Show(Capacity + ": Poor");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Poor");
                 }
             }
 
             if ((Age >= 20) && (Age <= 29))
             {
-                if (Capacity >= 55)
+                if (Result >= 55)
                 {
-                    MessageBox.Show(Capacity + ": Excellent");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Excellent");
                 }
-                else if ((Capacity >= 44) && (Capacity <= 54))
+                else if ((Result >= 44) && (Result <= 54))
                 {
-                    MessageBox.Show(Capacity + ": Good");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Good");
                 }
-                else if ((Capacity >= 35) && (Capacity <= 43))
+                else if ((Result >= 35) && (Result <= 43))
                 {
-                    MessageBox.Show(Capacity + ": Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Average");
                 }
-                else if ((Capacity >= 28) && (Capacity <= 34))
+                else if ((Result >= 28) && (Result <= 34))
                 {
-                    MessageBox.Show(Capacity + ": Below Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Below Average");
                 }
                 else
                 {
-                    MessageBox.Show(Capacity + ": Poor");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Poor");
                 }
             }
 
             if ((Age >= 30) && (Age <= 39))
             {
-                if (Capacity >= 50)
+                if (Result >= 50)
                 {
-                    MessageBox.Show(Capacity + ": Excellent");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Excellent");
                 }
-                else if ((Capacity >= 40) && (Capacity <= 49))
+                else if ((Result >= 40) && (Result <= 49))
                 {
-                    MessageBox.Show(Capacity + ": Good");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Good");
                 }
-                else if ((Capacity >= 34) && (Capacity <= 39))
+                else if ((Result >= 34) && (Result <= 39))
                 {
-                    MessageBox.Show(Capacity + ": Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Average");
                 }
-                else if ((Capacity >= 26) && (Capacity <= 33))
+                else if ((Result >= 26) && (Result <= 33))
                 {
-                    MessageBox.Show(Capacity + ": Below Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Below Average");
                 }
                 else
                 {
-                    MessageBox.Show(Capacity + ": Poor");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Poor");
                 }
             }
 
             if ((Age >= 40) && (Age <= 49))
             {
-                if (Capacity >= 46)
+                if (Result >= 46)
                 {
-                    MessageBox.Show(Capacity + ": Excellent");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Excellent");
                 }
-                else if ((Capacity >= 37) && (Capacity <= 45))
+                else if ((Result >= 37) && (Result <= 45))
                 {
-                    MessageBox.Show(Capacity + ": Good");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Good");
                 }
-                else if ((Capacity >= 32) && (Capacity <= 36))
+                else if ((Result >= 32) && (Result <= 36))
                 {
-                    MessageBox.Show(Capacity + ": Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Average");
                 }
-                else if ((Capacity >= 25) && (Capacity <= 32))
+                else if ((Result >= 25) && (Result <= 32))
                 {
-                    MessageBox.Show(Capacity + ": Below Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Below Average");
                 }
                 else
                 {
-                    MessageBox.Show(Capacity + ": Poor");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Poor");
                 }
             }
 
             if ((Age >= 50) && (Age <= 59))
             {
-                if (Capacity >= 44)
+                if (Result >= 44)
                 {
-                    MessageBox.Show(Capacity + ": Excellent");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Excellent");
                 }
-                else if ((Capacity >= 35) && (Capacity <= 43))
+                else if ((Result >= 35) && (Result <= 43))
                 {
-                    MessageBox.Show(Capacity + ": Good");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Good");
                 }
-                else if ((Capacity >= 29) && (Capacity <= 34))
+                else if ((Result >= 29) && (Result <= 34))
                 {
-                    MessageBox.Show(Capacity + ": Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Average");
                 }
-                else if ((Capacity >= 23) && (Capacity <= 28))
+                else if ((Result >= 23) && (Result <= 28))
                 {
-                    MessageBox.Show("Below Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Below Average");
                 }
                 else
                 {
-                    MessageBox.Show(Capacity + ": Poor");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Poor");
                 }
             }
 
             if ((Age >= 60) && (Age <= 65))
             {
-                if (Capacity >= 40)
+                if (Result >= 40)
                 {
-                    MessageBox.Show(Capacity + ": Excellent");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Excellent");
                 }
-                else if ((Capacity >= 33) && (Capacity <= 39))
+                else if ((Result >= 33) && (Result <= 39))
                 {
-                    MessageBox.Show(Capacity + ": Good");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Good");
                 }
-                else if ((Capacity >= 25) && (Capacity <= 32))
+                else if ((Result >= 25) && (Result <= 32))
                 {
-                    MessageBox.Show(Capacity + ": Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Average");
                 }
-                else if ((Capacity >= 20) && (Capacity <= 24))
+                else if ((Result >= 20) && (Result <= 24))
                 {
-                    MessageBox.Show(Capacity + ": Below Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Below Average");
                 }
                 else
                 {
-                    MessageBox.Show(Capacity + ": Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Average");
                 }
             }
         }
 
-        public void Malerb_CheckedChanged(decimal Capacity)
+        public void Male(int Result)
         {
+            decimal Age = Agenum.Value;
+
             if ((Age >= 15) && (Age <= 19))
             {
-                if (Capacity >= 55)
+                if (Result >= 55)
                 {
-                    MessageBox.Show(Capacity + ": Excellent");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Excellent");
                 }
-                else if ((Capacity >= 44) && (Capacity <= 54))
+                else if ((Result >= 44) && (Result <= 54))
                 {
-                    MessageBox.Show(Capacity + ": Good");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Good");
                 }
-                else if ((Capacity >= 36) && (Capacity <= 43))
+                else if ((Result >= 36) && (Result <= 43))
                 {
-                    MessageBox.Show(Capacity + ": Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Average");
                 }
-                else if ((Capacity >= 29) && (Capacity <= 35))
+                else if ((Result >= 29) && (Result <= 35))
                 {
-                    MessageBox.Show(Capacity + ": Below Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Below Average");
                 }
                 else
                 {
-                    MessageBox.Show(Capacity + ": Poor");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Poor");
                 }
             }
 
             if ((Age >= 20) && (Age <= 29))
             {
-                if (Capacity >= 50)
+                if (Result >= 50)
                 {
-                    MessageBox.Show(Capacity + ": Excellent");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Excellent");
                 }
-                else if ((Capacity >= 40) && (Capacity <= 49))
+                else if ((Result >= 40) && (Result <= 49))
                 {
-                    MessageBox.Show(Capacity + ": Good");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Good");
                 }
-                else if ((Capacity >= 32) && (Capacity <= 39))
+                else if ((Result >= 32) && (Result <= 39))
                 {
-                    MessageBox.Show(Capacity + ": Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Average");
                 }
-                else if ((Capacity >= 27) && (Capacity <= 31))
+                else if ((Result >= 27) && (Result <= 31))
                 {
-                    MessageBox.Show(Capacity + ": Below Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Below Average");
                 }
                 else
                 {
-                    MessageBox.Show(Capacity + ": Poor");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Poor");
                 }
             }
 
             if ((Age >= 30) && (Age <= 39))
             {
-                if (Capacity >= 46)
+                if (Result >= 46)
                 {
-                    MessageBox.Show(Capacity + ": Excellent");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Excellent");
                 }
-                else if ((Capacity >= 36) && (Capacity <= 45))
+                else if ((Result >= 36) && (Result <= 45))
                 {
-                    MessageBox.Show(Capacity + ": Good");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Good");
                 }
-                else if ((Capacity >= 30) && (Capacity <= 35))
+                else if ((Result >= 30) && (Result <= 35))
                 {
-                    MessageBox.Show(Capacity + ": Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Average");
                 }
-                else if ((Capacity >= 25) && (Capacity <= 29))
+                else if ((Result >= 25) && (Result <= 29))
                 {
-                    MessageBox.Show(Capacity + ": Below Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Below Average");
                 }
                 else
                 {
-                    MessageBox.Show(Capacity + ": Poor");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Poor");
                 }
             }
 
             if ((Age >= 40) && (Age <= 49))
             {
-                if (Capacity >= 43)
+                if (Result >= 43)
                 {
-                    MessageBox.Show(Capacity + ": Excellent");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Excellent");
                 }
-                else if ((Capacity >= 34) && (Capacity <= 42))
+                else if ((Result >= 34) && (Result <= 42))
                 {
-                    MessageBox.Show(Capacity + ": Good");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Good");
                 }
-                else if ((Capacity >= 28) && (Capacity <= 33))
+                else if ((Result >= 28) && (Result <= 33))
                 {
-                    MessageBox.Show(Capacity + ": Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Average");
                 }
-                else if ((Capacity >= 22) && (Capacity <= 27))
+                else if ((Result >= 22) && (Result <= 27))
                 {
-                    MessageBox.Show(Capacity + ": Below Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Below Average");
                 }
                 else
                 {
-                    MessageBox.Show(Capacity + ": Poor");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Poor");
                 }
             }
 
             if ((Age >= 50) && (Age <= 59))
             {
-                if (Capacity >= 41)
+                if (Result >= 41)
                 {
-                    MessageBox.Show(Capacity + ": Excellent");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Excellent");
                 }
-                else if ((Capacity >= 33) && (Capacity <= 40))
+                else if ((Result >= 33) && (Result <= 40))
                 {
-                    MessageBox.Show(Capacity + ": Good");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Good");
                 }
-                else if ((Capacity >= 26) && (Capacity <= 32))
+                else if ((Result >= 26) && (Result <= 32))
                 {
-                    MessageBox.Show(Capacity + ": Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Average");
                 }
-                else if ((Capacity >= 21) && (Capacity <= 25))
+                else if ((Result >= 21) && (Result <= 25))
                 {
-                    MessageBox.Show(Capacity + ": Below Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Below Average");
                 }
                 else
                 {
-                    MessageBox.Show(Capacity + ": Poor");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Poor");
                 }
             }
 
             if ((Age >= 60) && (Age <= 65))
             {
-                if (Capacity >= 39)
+                if (Result >= 39)
                 {
-                    MessageBox.Show(Capacity + ": Excellent");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Excellent");
                 }
-                else if ((Capacity >= 31) && (Capacity <= 38))
+                else if ((Result >= 31) && (Result <= 38))
                 {
-                    MessageBox.Show(Capacity + ": Good");
-
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Good");
                 }
-                else if ((Capacity >= 24) && (Capacity <= 30))
+                else if ((Result >= 24) && (Result <= 30))
                 {
-                    MessageBox.Show(Capacity + ": Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Average");
                 }
-                else if ((Capacity >= 19) && (Capacity <= 23))
+                else if ((Result >= 19) && (Result <= 23))
                 {
-                    MessageBox.Show(Capacity + ": Below Average");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Below Average");
                 }
                 else
                 {
-                    MessageBox.Show(Capacity + ": Poor");
+                    MessageBox.Show("Your Aerobic Capacity is: " + Result + " and your Fitness Rating is: Poor");
                 }
             }
         }
-
+        
         private void Clearbtn_Click(object sender, EventArgs e)
         {
             //Reset all inputs to clear
-            HR1num.Value = 0;
-            HR2num.Value = 0;
-            HR3num.Value = 0;
-            HR4num.Value = 0;
-            HR5num.Value = 0;
+            HR1num.Value = 60;
+            HR2num.Value = 60;
+            HR3num.Value = 60;
+            HR4num.Value = 60;
+            HR5num.Value = 60;
             Agenum.Value = 16;
             Firsttxt.Text = "";
             Lasttxt.Text = "";
@@ -466,6 +489,7 @@ namespace Step_Test_3
             SH30rb.Checked = false;
             Mhrlbl.Text = "Max Heart Rate (bpm)";
             Mhr1lbl.Text = "";
+            chart1.Series.Clear();
         }
 
         private void Savebtn_Click(object sender, EventArgs e, decimal Capacity, string sex)
@@ -493,12 +517,13 @@ namespace Step_Test_3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            chart1.Series[0].Points.Clear();
-            chart1.Series["Max"].Points.AddY(60, 210);
-            chart1.Series[0].Points.AddXY(axisX);
-            chart1.Series["Max"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            chart1.Series["Max"].BorderWidth = 3;
-            chart1.Series["Max"].Color = Color.Red;
+            chart1.Series.Clear();
         }
+
+        //private void Retrievebtn_Click(object sender, EventArgs e, decimal Capacity, string sex)
+        //{
+        //    var DataRetrieve = new DataRetrieve();
+        //    DataRetrieve.Show();
+        //}
     }
 }

@@ -25,6 +25,6 @@ namespace Step_Test_3
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Result> Results { get; set; }
+      //  public virtual DbSet<Result> Results1 { get; set; }
     }
 }

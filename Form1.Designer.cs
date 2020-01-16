@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.TesterNotestxt = new System.Windows.Forms.TextBox();
             this.TesterNoteslbl = new System.Windows.Forms.Label();
@@ -226,7 +226,6 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.panel1);
             this.groupBox3.Controls.Add(this.HR5num);
             this.groupBox3.Controls.Add(this.HR4num);
             this.groupBox3.Controls.Add(this.HR3num);
@@ -245,7 +244,7 @@
             this.groupBox3.Controls.Add(this.SH15rb);
             this.groupBox3.Location = new System.Drawing.Point(881, 23);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(175, 405);
+            this.groupBox3.Size = new System.Drawing.Size(175, 349);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Test Data";
@@ -254,7 +253,7 @@
             // 
             this.panel1.Controls.Add(this.Femalerb);
             this.panel1.Controls.Add(this.Malerb);
-            this.panel1.Location = new System.Drawing.Point(6, 346);
+            this.panel1.Location = new System.Drawing.Point(881, 390);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(163, 53);
             this.panel1.TabIndex = 16;
@@ -269,6 +268,7 @@
             this.Femalerb.TabStop = true;
             this.Femalerb.Text = "Female";
             this.Femalerb.UseVisualStyleBackColor = true;
+//            this.Femalerb.CheckedChanged += new System.EventHandler(this.Femalerb_CheckedChanged);
             // 
             // Malerb
             // 
@@ -280,6 +280,7 @@
             this.Malerb.TabStop = true;
             this.Malerb.Text = "Male";
             this.Malerb.UseVisualStyleBackColor = true;
+//            this.Malerb.CheckedChanged += new System.EventHandler(this.Malerb_CheckedChanged);
             // 
             // HR5num
             // 
@@ -292,6 +293,11 @@
             this.HR5num.Name = "HR5num";
             this.HR5num.Size = new System.Drawing.Size(120, 20);
             this.HR5num.TabIndex = 15;
+            this.HR5num.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
             // 
             // HR4num
             // 
@@ -304,6 +310,11 @@
             this.HR4num.Name = "HR4num";
             this.HR4num.Size = new System.Drawing.Size(120, 20);
             this.HR4num.TabIndex = 14;
+            this.HR4num.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
             // 
             // HR3num
             // 
@@ -316,6 +327,11 @@
             this.HR3num.Name = "HR3num";
             this.HR3num.Size = new System.Drawing.Size(120, 20);
             this.HR3num.TabIndex = 13;
+            this.HR3num.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
             // 
             // HR2num
             // 
@@ -328,6 +344,11 @@
             this.HR2num.Name = "HR2num";
             this.HR2num.Size = new System.Drawing.Size(120, 20);
             this.HR2num.TabIndex = 12;
+            this.HR2num.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
             // 
             // HR1num
             // 
@@ -340,6 +361,11 @@
             this.HR1num.Name = "HR1num";
             this.HR1num.Size = new System.Drawing.Size(120, 20);
             this.HR1num.TabIndex = 11;
+            this.HR1num.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
             // 
             // HR5lbl
             // 
@@ -414,6 +440,7 @@
             this.SH30rb.TabStop = true;
             this.SH30rb.Text = "30cm";
             this.SH30rb.UseVisualStyleBackColor = true;
+            this.SH30rb.CheckedChanged += new System.EventHandler(this.SH30rb_CheckedChanged);
             // 
             // SH25rb
             // 
@@ -425,6 +452,7 @@
             this.SH25rb.TabStop = true;
             this.SH25rb.Text = "25cm";
             this.SH25rb.UseVisualStyleBackColor = true;
+            this.SH25rb.CheckedChanged += new System.EventHandler(this.SH25rb_CheckedChanged);
             // 
             // SH20rb
             // 
@@ -436,6 +464,7 @@
             this.SH20rb.TabStop = true;
             this.SH20rb.Text = "20cm";
             this.SH20rb.UseVisualStyleBackColor = true;
+            this.SH20rb.CheckedChanged += new System.EventHandler(this.SH20rb_CheckedChanged);
             // 
             // SH15rb
             // 
@@ -447,6 +476,7 @@
             this.SH15rb.TabStop = true;
             this.SH15rb.Text = "15cm";
             this.SH15rb.UseVisualStyleBackColor = true;
+            this.SH15rb.CheckedChanged += new System.EventHandler(this.SH15rb_CheckedChanged);
             // 
             // groupBox2
             // 
@@ -491,26 +521,20 @@
             // 
             // chart1
             // 
-            chartArea2.AxisX.MajorGrid.Interval = 0D;
-            chartArea2.AxisX.Title = "misO2/kg/min";
-            chartArea2.AxisY.Interval = 10D;
-            chartArea2.AxisY.IsStartedFromZero = false;
-            chartArea2.AxisY.Maximum = 200D;
-            chartArea2.AxisY.Minimum = 60D;
-            chartArea2.AxisY.Title = "Heart Rate (beats/min)";
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(218, 23);
+            chartArea3.AxisX.Title = "misO2/kg/min";
+            chartArea3.AxisY.Title = "Heart Rate (beats/per minute)";
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart1.Legends.Add(legend3);
+            this.chart1.Location = new System.Drawing.Point(239, 23);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            series2.YValuesPerPoint = 10;
-            this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(645, 430);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart1.Series.Add(series3);
+            this.chart1.Size = new System.Drawing.Size(608, 505);
             this.chart1.TabIndex = 4;
             this.chart1.Text = "chart1";
             // 
@@ -519,6 +543,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1068, 540);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
@@ -579,12 +604,12 @@
         private System.Windows.Forms.Button Savebtn;
         private System.Windows.Forms.Button Clearbtn;
         private System.Windows.Forms.Button Calcbtn;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.TextBox TesterNotestxt;
         private System.Windows.Forms.Label TesterNoteslbl;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton Femalerb;
         private System.Windows.Forms.RadioButton Malerb;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
 
